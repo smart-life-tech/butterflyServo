@@ -53,7 +53,7 @@ void moveServoBackward(int startServo, int endServo)
     {
         for (int servoNum = startServo; servoNum <= endServo; servoNum++)
         {
-            int pulse = map(angle, 0, 180, SERVOMIN, SERVOMAX);
+            int pulse = map(angle, 180, 0, SERVOMIN, SERVOMAX);
             pwm.setPWM(servoNum, 0, pulse);
         }
         delay(smoothDelay); // Delay for smooth movement
