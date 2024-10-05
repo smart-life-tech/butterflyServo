@@ -41,15 +41,15 @@ void loop()
     Serial.println("moving servo 1 to 11");
     moveServoForward(0, 11); // Move servos 0 to 11 to 180 degrees
     delay(intervalDelay);    // Delay for 1 second
-    //Serial.println("moving servo 12 to 23 forward");
-    //moveServoForward(0, 11); // Move servos 12 to 23 to 180 degrees
-    //delay(intervalDelay);    // Delay for 1 second
+    // Serial.println("moving servo 12 to 23 forward");
+    // moveServoForward(0, 11); // Move servos 12 to 23 to 180 degrees
+    // delay(intervalDelay);    // Delay for 1 second
     Serial.println("moving servo 12 to 23");
     moveServoBackward(0, 11); // Move servos 12 to 23 from 180 degrees
     delay(intervalDelay);     // Delay for 1 second
-   // Serial.println("moving servo 0 to 11");
-   // moveServoBackward(0, 11); // Move servos 0 to 11
-    //delay(intervalDelay);     // Delay for 1 second from 180 degrees
+                              // Serial.println("moving servo 0 to 11");
+                              // moveServoBackward(0, 11); // Move servos 0 to 11
+    // delay(intervalDelay);     // Delay for 1 second from 180 degrees
 }
 
 void moveServoBackward(int startServo, int endServo)
@@ -61,7 +61,7 @@ void moveServoBackward(int startServo, int endServo)
         {
             int pulse = map(angle, 0, 180, SERVOMAX, SERVOMIN);
             pwm.setPWM(bottomServos[servoNum], 0, pulse);
-            int pulse = map(angle, 0, 180, SERVOMIN, SERVOMAX);
+            pulse = map(angle, 0, 180, SERVOMIN, SERVOMAX);
             pwm.setPWM(topServos[servoNum], 0, pulse);
         }
         delay(smoothDelay); // Delay for smooth movement
