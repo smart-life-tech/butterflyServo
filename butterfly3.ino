@@ -3,8 +3,8 @@
 
 #define SERVOMIN 150 // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX 600 // This is the 'maximum' pulse length count (out of 4096)
-int smoothDelay = 20;
-int intervalDelay = 500;
+int smoothDelay = 90;
+int intervalDelay = 1000;
 
 int bottomServos[12] = {0, 1, 2, 3, 4, 5, 12, 13, 14, 15, 16, 17};
 int topServos[12] = {6, 7, 8, 9, 10, 11, 18, 19, 20, 21, 22, 23};
@@ -21,6 +21,23 @@ void moveServoForward(int startServo, int endServo)
             int pulse = map(angle, 0, 180, SERVOMIN, SERVOMAX);
             pwm.setPWM(bottomServos[servoNum], 0, pulse);
             pulse = map(angle, 0, 180, SERVOMAX, SERVOMIN);
+            pwm.setPWM(topServos[servoNum], 0, pulse);
+        }
+        delay(smoothDelay); // Delay for smooth movement
+    }
+}
+
+
+void moveServoBackward(int startServo, int endServo)
+{
+    // Reverse the movement (180 to 0 degrees)
+    for (int angle = 180; angle >= 0; angle--)
+    {
+        for (int servoNum = startServo; servoNum <= endServo; servoNum++)
+        {
+            int pulse = map(angle, 0, 180, SERVOMAX, SERVOMIN);
+            pwm.setPWM(bottomServos[servoNum], 0, pulse);
+            pulse = map(angle, 0, 180, SERVOMIN, SERVOMAX);
             pwm.setPWM(topServos[servoNum], 0, pulse);
         }
         delay(smoothDelay); // Delay for smooth movement
@@ -45,20 +62,4 @@ void loop()
     Serial.println("moving servo 12 to 23");
     moveServoBackward(0, 11); // Move servos 12 to 23 from 180 degrees
     delay(intervalDelay);     // Delay for 1 second
-}
-
-void moveServoBackward(int startServo, int endServo)
-{
-    // Reverse the movement (180 to 0 degrees)
-    for (int angle = 180; angle >= 0; angle--)
-    {
-        for (int servoNum = startServo; servoNum <= endServo; servoNum++)
-        {
-            int pulse = map(angle, 180, 0, SERVOMAX, SERVOMIN);
-            pwm.setPWM(bottomServos[servoNum], 0, pulse);
-            pulse = map(angle, 180, 0, SERVOMIN, SERVOMAX);
-            pwm.setPWM(topServos[servoNum], 0, pulse);
-        }
-        delay(smoothDelay); // Delay for smooth movement
-    }
 }
