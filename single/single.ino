@@ -43,5 +43,5 @@ void loop()
 {
     Serial.println("Moving servo back and forth");
     moveServoBackAndForth(servoNum); // Move the specified servo back and forth
-    delay(500); // Delay for half a second before repeating
+    delay(500);                      // Delay for half a second before repeating
 }
