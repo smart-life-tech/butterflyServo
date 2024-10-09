@@ -31,7 +31,7 @@ void moveServoForward(int startServo, int endServo)
 void moveServoBackward(int startServo, int endServo)
 {
     // Reverse the movement (180 to 0 degrees)
-    for (int angle = 180; angle >= 0; angle--)
+    for (int angle = 0; angle <= 180; angle++)
     {
         for (int servoNum = startServo; servoNum <= endServo; servoNum++)
         {
